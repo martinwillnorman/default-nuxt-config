@@ -19,12 +19,13 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
+
   loading: { color: '#fff' },
 
   /*
   ** Global CSS
   */
-  css: [],
+  css: ['@/assets/styles/main.scss'],
 
   /*
   ** Plugins to load before mounting the App
@@ -34,43 +35,55 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [],
+  modules: ['nuxt-purgecss', 'nuxt-svg-loader'],
 
   /*
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
+    extractCSS: true,
+    postcss: {
+      // Add plugin names as key and arguments as value
+      // Install them before as dependencies with npm or yarn
+      plugins: {
+        // Disable a plugin by passing false as value
+        'postcss-url': false,
+        'postcss-nested': false,
+        'postcss-responsive-type': {},
+        'postcss-hexrgba': {},
+        'css-mqpacker': {}
+      },
+      preset: {
+        // Change the postcss-preset-env settings
+        // autoprefixer: {
+        //   grid: true
+        // }
+      }
+    },
+
     extend(config, { isDev, isClient }) {
-      config.module.rules.forEach(rule => {
-        if (String(rule.test) === String(/\.(png|jpe?g|gif|svg|webp)$/)) {
-          // add a second loader when loading images
-          rule.use.push({
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 65
-              },
-              // optipng.enabled: false will disable optipng
-              optipng: {
-                enabled: false
-              },
-              pngquant: {
-                quality: '65-90',
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 75
-              }
-            }
-          })
+      // adding the new loader as the first in the list
+      config.module.rules.unshift({
+        test: /\.(png|jpe?g|gif)$/,
+        use: {
+          loader: 'responsive-loader',
+          options: {
+            name: 'img/[hash:7]-[width].[ext]',
+            min: 350,
+            max: 2800,
+            steps: 7,
+            placeholder: false,
+            quality: 85,
+            adapter: require('responsive-loader/sharp')
+          }
+        }
+      })
+      // remove old pattern from the older loader
+      config.module.rules.forEach(value => {
+        if (String(value.test) === String(/\.(png|jpe?g|gif|svg|webp)$/)) {
+          // reduce to svg and webp, as other images are handled above
+          value.test = /\.(svg|webp)$/
+          // keep the configuration from image-webpack-loader here unchanged
         }
       })
     }
