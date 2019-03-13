@@ -1,0 +1,68 @@
+// --------------------------------------------------------- website color
+$website-color-base: #000;
+$website-color-secondary: #fff;
+
+// --------------------------------------------------------- unit of measurement for spacing (based on 8px grid)
+
+$basic-unit: 8px;
+
+// --------------------------------------------------------- container padding & wi0dth : ($container-padding) also sets column padding and negative row margin
+
+$container-width: calc-multiple-of-base(1273px);
+$container-padding: calc-multiple-of-base(24px);
+
+// --------------------------------------------------------- font family
+
+$font-family-base: serif;
+$font-family-header: sans-serif;
+
+// --------------------------------------------------------- font size
+
+$font-size-base: 22px;
+
+// --------------------------------------------------------- font color
+
+$font-color-base: #000;
+$font-color-header: #000;
+$font-color-additional: (
+  "subheader": #eee
+);
+
+// --------------------------------------------------------- link behavior
+
+$link-decoration: none !important;
+$link-hover-decoration: none !important;
+
+// --------------------------------------------------------- link color
+
+$link-color-base: #000;
+$link-color-hover: none;
+
+// --------------------------------------------------------- background color
+
+$background-colors: (
+  "white": #fff,
+  "black": #000,
+  "grey": #eee
+);
+
+// --------------------------------------------------------- no of grid classes
+
+$no-of-columns: 12;
+$no-of-restrictors: 12;
+$no-of-max: 12;
+$no-of-positions: 12;
+$no-of-spacers: 30;
+
+// --------------------------------------------------------- breakpoints
+
+$breakpoints: (
+  "phone": calc-multiple-of-base(450px),
+  "phablet": calc-multiple-of-base(540px),
+  "tablet-small": calc-multiple-of-base(640px),
+  "tablet": calc-multiple-of-base(768px),
+  "tablet-wide": calc-multiple-of-base(1024px),
+  "desktop": calc-multiple-of-base(1248px),
+  "desktop-wide": calc-multiple-of-base(1440px),
+  "container": calc-multiple-of-base($container-width)
+);

@@ -13,10 +13,10 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "nuxt": "^2.4.0",
-    "nuxt-svg-loader": "^1.0.1"
+    "nuxt": "^2.4.0"
   },
   "devDependencies": {
+    "nuxt-svg-loader": "^1.0.1",
     "css-mqpacker": "^7.0.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "2.6.2",
