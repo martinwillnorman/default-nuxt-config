@@ -1,1 +1,32 @@
-@import '../../node_modules/normalize-scss/sass/normalize/import-now';
+// Tools
+
+@import './2tools/functions';
+@import './2tools/mixins';
+@import './2tools/creators';
+
+// Settings
+
+@import './1settings/color';
+@import './1settings/general';
+@import './1settings/font';
+
+// Generic
+
+@import './3generic/box-sizing';
+@import './3generic/normalize';
+@import './3generic/reset';
+@import './3generic/font-smoothing';
+@import './3generic/document-height';
+@import './3generic/set-font';
+
+// Elements
+
+@import './4elements/typography';
+@import './4elements/unordered-list';
+@import './4elements/table';
+@import './4elements/anchor';
+
+// Objects
+
+@import './5objects/grid';
+@import './5objects/supplemental';

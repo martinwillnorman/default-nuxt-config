@@ -7,7 +7,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Default',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -23,11 +23,6 @@ module.exports = {
   loading: { color: '#fff' },
 
   /*
-  ** Global CSS
-  */
-  css: ['@/assets/css/main.scss'],
-
-  /*
   ** Plugins to load before mounting the App
   */
   plugins: [],
@@ -35,7 +30,10 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: ['nuxt-purgecss', 'nuxt-svg-loader'],
+  modules: ['nuxt-purgecss', 'nuxt-svg-loader', '@nuxtjs/style-resources'],
+  styleResources: {
+    scss: ['./assets/css/main.scss']
+  },
 
   /*
   ** Build configuration

@@ -1,0 +1,16 @@
+.grid__column {
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.grid__column,
+div[class^="grid__column-"],
+div[class*=" grid__column-"],
+div[class^="grid__restrictor-"],
+div[class*=" grid__restrictor-"] {
+  padding-left: $container-padding / 2;
+  padding-right: $container-padding / 2;
+}
+
+@include create-columns($no-of-columns);

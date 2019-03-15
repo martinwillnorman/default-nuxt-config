@@ -1,0 +1,172 @@
+// webp mixin / requires modernizr
+
+@mixin webp-background(
+  $img,
+  $color: transparent,
+  $repeat: repeat,
+  $attachment: scroll,
+  $position: center,
+  $size: auto,
+  $type: ".png"
+) {
+  background: $color url("/frontend/img/#{$img}.webp") $repeat $attachment
+    $position / $size;
+  .no-webp & {
+    background-image: url("/frontend/img/#{$img}#{$type}");
+  }
+}
+
+// basic usage -- @include webp-background($img: 'my-image.jpg');
+
+// ---------------------------------------------------------------------------------------
+
+// center absolute
+
+@mixin center-absolute($position: horizontal) {
+  position: absolute;
+
+  @if ($position == "vertical") {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if ($position == "horizontal") {
+    left: 50%;
+    transform: translate(-50%);
+  } @else if ($position == "both") {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// basic usage -- @include absolute-center($position: "vertical")
+
+// ---------------------------------------------------------------------------------------
+
+// center block element
+
+@mixin center-block {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+// basic usage -- @include center-block()
+
+// ---------------------------------------------------------------------------------------
+
+//
+
+@mixin pseudo($content: "", $position: absolute, $display: block) {
+  content: $content;
+  position: $position;
+  display: $display;
+}
+
+// basic usage -- @include pseudo($display: "inline-block")
+
+// ---------------------------------------------------------------------------------------
+
+// truncate text
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// basic usage -- @include truncate(500px)
+
+// ---------------------------------------------------------------------------------------
+
+// media queries / requires $breakpoints variable map
+
+@mixin media-query($width, $type: max) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @media only screen and (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+// basic usage -- @include(mobile)
+
+// ---------------------------------------------------------------------------------------
+
+// absolute position
+
+@mixin abs-pos($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// basic usage @include abs-pos()
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+// =============================================================================
+// Font Face
+// =============================================================================
+
+@mixin font-face(
+  $name,
+  $path,
+  $weight: null,
+  $style: null,
+  $exts: eot woff2 woff ttf svg
+) {
+  $src: null;
+
+  $extmods: (
+    eot: "?",
+    svg: "#" + str-replace($name, " ", "_")
+  );
+
+  $formats: (
+    otf: "opentype",
+    ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(
+      map-has-key($extmods, $ext),
+      $ext + map-get($extmods, $ext),
+      $ext
+    );
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append(
+      $src,
+      url(quote($path + "." + $extmod)) format(quote($format)),
+      comma
+    );
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}

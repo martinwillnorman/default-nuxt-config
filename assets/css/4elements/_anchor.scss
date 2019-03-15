@@ -1,0 +1,9 @@
+a {
+  color: $link-c;
+  text-decoration: $link-decoration;
+}
+
+a:hover {
+  color: $link-c-hover;
+  text-decoration: $link-decoration-hover;
+}

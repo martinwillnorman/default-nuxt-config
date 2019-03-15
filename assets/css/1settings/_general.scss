@@ -1,0 +1,21 @@
+$container-width: 1230px;
+$container-padding: 1rem;
+
+$link-decoration: none !important;
+$link-decoration-hover: none !important;
+
+$no-of-columns: 12;
+$no-of-restrictors: 12;
+$no-of-max: 12;
+$no-of-positions: 12;
+
+$breakpoints: (
+  "phone": 450px,
+  "phablet": 540px,
+  "tablet-small": 640px,
+  "tablet": 768px,
+  "tablet-wide": 1024px,
+  "desktop": 1248px,
+  "desktop-wide": 1440px,
+  "container": $container-width
+);

@@ -1,0 +1,7 @@
+@each $breakpoint-name, $breakpoint-value in $breakpoints {
+  @media only screen and (max-width: $breakpoint-value) {
+    .--break-#{$breakpoint-name} {
+      flex-basis: 100%;
+    }
+  }
+}
